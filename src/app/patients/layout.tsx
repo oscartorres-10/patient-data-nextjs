@@ -10,5 +10,10 @@ export default function PatientsLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <section>{children}</section>
+  return (
+    <section className='p-5'>
+      <h1 className='text-3xl'>Patients Data</h1>
+      {children}
+    </section>
+  )
 }
