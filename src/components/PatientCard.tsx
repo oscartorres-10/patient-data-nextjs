@@ -1,8 +1,9 @@
 import { Patient } from '@/types/Patient'
 import initials from '@/utils/initials'
-import { GlobeIcon } from '@radix-ui/react-icons'
+import { GlobeIcon, Pencil1Icon } from '@radix-ui/react-icons'
 import { Avatar } from 'radix-ui'
 import { useState } from 'react'
+import { PatientModal } from './PatientModal'
 
 const CardContainer = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -32,13 +33,15 @@ const CardDescription = ({ children }: { children: string }) => {
     return (
       <div>
         <p
-          className={`text-gray-500 ${!isExpanded && 'line-clamp-2'} min-h-12`}>
+          className={`text-gray-500 ${!isExpanded && 'line-clamp-2'} min-h-12`}
+        >
           {children}
         </p>
         {children.length > 100 && (
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className='cursor-pointer text-blue-500 text-sm hover:underline'>
+            className='cursor-pointer text-blue-500 text-sm hover:underline'
+          >
             {isExpanded ? 'Show less' : 'Read more'}
           </button>
         )}
@@ -65,30 +68,41 @@ const CardWebsite = ({ url }: { url: string }) => {
 }
 
 export const PatientCard = ({
-  createdAt,
-  name,
-  avatar,
-  description,
-  website,
-  id,
-}: Patient) => {
+  patient,
+  onEdit,
+}: {
+  patient: Patient
+  onEdit: (patient: Patient) => void
+}) => {
+  const [showModal, setShowModal] = useState(false)
+  const { createdAt, name, avatar, description, website, id } = patient
+
   return (
     <>
       <CardContainer>
-        <div className='flex justify-between items-center'>
-          <CardTitle>{name}</CardTitle>
-          <Avatar.Root className='inline-flex items-center justify-center align-middle overflow-hidden select-none w-[45px] h-[45px] rounded-full bg-black/[0.03] border border-solid'>
-            <Avatar.Image
-              className='w-full h-full object-cover border-inherit'
-              src={avatar}
-              alt={name}
-            />
-            <Avatar.Fallback
-              className='w-full h-full flex items-center justify-center text-[15px] leading-none font-medium'
-              delayMs={600}>
-              {initials(name)}
-            </Avatar.Fallback>
-          </Avatar.Root>
+        <div className='flex items-center justify-between'>
+          <div className='flex gap-4 items-center'>
+            <Avatar.Root className='inline-flex items-center justify-center align-middle overflow-hidden select-none w-[45px] h-[45px] rounded-full bg-black/[0.03] border border-solid'>
+              <Avatar.Image
+                className='w-full h-full object-cover border-inherit'
+                src={avatar}
+                alt={name}
+              />
+              <Avatar.Fallback
+                className='w-full h-full flex items-center justify-center text-[15px] leading-none font-medium'
+                delayMs={600}
+              >
+                {initials(name)}
+              </Avatar.Fallback>
+            </Avatar.Root>
+            <CardTitle>{name}</CardTitle>
+          </div>
+          <button
+            className='cursor-pointer p-2 bg-violet-300 hover:bg-violet-400 hover:opacity-90 rounded'
+            onClick={() => setShowModal(true)}
+          >
+            <Pencil1Icon></Pencil1Icon>
+          </button>
         </div>
         <CardDescription>{description}</CardDescription>
         <CardWebsite url={website}></CardWebsite>
@@ -97,6 +111,14 @@ export const PatientCard = ({
           <CardId>ID: {id}</CardId>
         </div>
       </CardContainer>
+      <PatientModal
+        patient={patient}
+        open={showModal}
+        setOpen={setShowModal}
+        onSave={(patient) => {
+          onEdit(patient)
+        }}
+      />
     </>
   )
 }
