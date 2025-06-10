@@ -1,5 +1,5 @@
 export default function initials(string: string): string {
-  if (!string) return ''
+  if (!string) return '👤'
 
   const words = string.trim().split(' ')
   const firstTwo = words.slice(0, 2)
