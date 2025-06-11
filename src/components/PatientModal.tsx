@@ -38,7 +38,7 @@ export const PatientModal = ({
 
   if (!open) return null
 
-  function resetModal() {
+  const resetModal = () => {
     setPatientData(emptyPatient())
     setError(undefined)
   }
@@ -46,9 +46,9 @@ export const PatientModal = ({
   return (
     <Dialog.Root open={open} modal={true}>
       <Dialog.Portal>
-        <Dialog.Overlay className='fixed inset-0 bg-black opacity-70' />
+        <Dialog.Overlay className='fixed inset-0 bg-black opacity-70 data-[state=open]:animate-modal-show' />
         <Dialog.Content
-          className='fixed left-1/2 top-1/2 max-h-[85vh] w-[90vw] max-w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-md bg-gray-50 p-[25px] shadow-[var(--shadow-6)] focus:outline-none'
+          className='fixed left-1/2 top-1/2 max-h-[85vh] w-[90vw] max-w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-md bg-background p-[25px] shadow-[var(--shadow-6)] focus:outline-none'
           onEscapeKeyDown={() => setOpen(false)}
         >
           <Dialog.Title className='m-0 text-[17px] font-bold'>
@@ -64,14 +64,14 @@ export const PatientModal = ({
           >
             <fieldset className='mb-[15px] flex items-center gap-5'>
               <label
-                className='w-[90px] text-right text-[15px] text-violet-600'
+                className='w-[90px] text-right text-[15px] text-violet-600 font-semibold'
                 htmlFor='name'
               >
                 Name
               </label>
               <input
                 id='name'
-                className='inline-flex h-[35px] w-full flex-1 items-center justify-center rounded px-2.5 text-[15px] leading-none text-violet-600 shadow-[0_0_0_1px] shadow-violet-700 outline-none focus:shadow-[0_0_0_2px] focus:shadow-violet-800 invalid:border-2 invalid:border-red-500'
+                className='inline-flex h-[35px] w-full flex-1 items-center justify-center rounded px-2.5 text-[15px] leading-none shadow-[0_0_0_1px] shadow-violet-700 outline-none focus:shadow-[0_0_0_2px] focus:shadow-violet-800 user-invalid:border-2 user-invalid:border-red-500'
                 defaultValue={patientData.name}
                 onChange={(e) =>
                   setPatientData({ ...patientData, name: e.target.value })
@@ -84,14 +84,14 @@ export const PatientModal = ({
             </fieldset>
             <fieldset className='mb-[15px] flex items-center gap-5'>
               <label
-                className='w-[90px] text-right text-[15px] text-violet-600'
+                className='w-[90px] text-right text-[15px] text-violet-600 font-semibold'
                 htmlFor='username'
               >
                 Description
               </label>
               <textarea
                 id='description'
-                className='inline-flex w-full min-h-10 max-h-40 flex-1 items-center justify-center rounded px-2.5 text-[15px] text-violet-600 shadow-[0_0_0_1px] shadow-violet-700 outline-none focus:shadow-[0_0_0_2px] focus:shadow-violet-800 invalid:border-2 invalid:border-red-500'
+                className='inline-flex w-full min-h-10 max-h-40 flex-1 items-center justify-center rounded px-2.5 text-[15px] shadow-[0_0_0_1px] shadow-violet-700 outline-none focus:shadow-[0_0_0_2px] focus:shadow-violet-800 user-invalid:border-2 user-invalid:border-red-500'
                 defaultValue={patientData.description}
                 onChange={(e) =>
                   setPatientData({
@@ -106,14 +106,14 @@ export const PatientModal = ({
             </fieldset>
             <fieldset className='mb-[15px] flex items-center gap-5'>
               <label
-                className='w-[90px] text-right text-[15px] text-violet-600'
+                className='w-[90px] text-right text-[15px] text-violet-600 font-semibold'
                 htmlFor='website'
               >
                 Website
               </label>
               <input
                 id='website'
-                className='inline-flex h-[35px] w-full flex-1 items-center justify-center rounded px-2.5 text-[15px] leading-none text-violet-600 shadow-[0_0_0_1px] shadow-violet-700 focus:shadow-[0_0_0_2px] outline-none invalid:outline-0 invalid:border-2 invalid:border-red-500'
+                className='inline-flex h-[35px] w-full flex-1 items-center justify-center rounded px-2.5 text-[15px] leading-none shadow-[0_0_0_1px] shadow-violet-700 focus:shadow-[0_0_0_2px] outline-none user-invalid:outline-0 user-invalid:border-2 user-invalid:border-red-500'
                 defaultValue={patientData.website}
                 onChange={(e) =>
                   setPatientData({ ...patientData, website: e.target.value })

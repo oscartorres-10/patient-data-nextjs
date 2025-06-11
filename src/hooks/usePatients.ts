@@ -27,9 +27,9 @@ export const usePatients = () => {
   const handleEditPatient = useCallback((patient: Patient) => {
     setResult((prevResult) => {
       if (!prevResult) return null
-      return prevResult.map(p => 
-        p.id === patient.id 
-          ? { ...p, ...patient } 
+      return prevResult.map(p =>
+        p.id === patient.id
+          ? { ...p, ...patient }
           : p
       )
     })
@@ -39,8 +39,8 @@ export const usePatients = () => {
     setResult((prevResult) => {
       if (!prevResult) return [patient]
       return [
-        ...prevResult,
-        patient
+        patient,
+        ...prevResult
       ]
     })
   }, [setResult])

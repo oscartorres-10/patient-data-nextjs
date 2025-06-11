@@ -7,7 +7,7 @@ import { PatientModal } from './PatientModal'
 
 const CardContainer = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className='grid gap-2 border border-solid rounded-2xl shadow-2xl p-3 w-lg bg-gradient-to-br from-purple-300 to-pink-400 text-foreground'>
+    <div className='grid gap-2 border border-solid rounded-2xl shadow-xl p-3 bg-gradient-to-br from-purple-300 to-pink-400 text-foreground w-full'>
       {children}
     </div>
   )
@@ -17,7 +17,7 @@ const CardTitle = ({ children }: { children: React.ReactNode }) => {
   if (!children) {
     return <h1 className='text-2xl font-extrabold italic'>No Name Available</h1>
   }
-  return <h1 className='text-2xl font-extrabold'>{children}</h1>
+  return <h1 className='text-2xl font-extrabold line-clamp-1'>{children}</h1>
 }
 
 const CardDescription = ({ children }: { children: string }) => {
@@ -82,19 +82,21 @@ export const PatientCard = ({
       <CardContainer>
         <div className='flex items-center justify-between'>
           <div className='flex gap-4 items-center'>
-            <Avatar.Root className='inline-flex items-center justify-center align-middle overflow-hidden select-none w-[45px] h-[45px] rounded-full bg-black/[0.03] border border-solid'>
-              <Avatar.Image
-                className='w-full h-full object-cover border-inherit'
-                src={avatar}
-                alt={name}
-              />
-              <Avatar.Fallback
-                className='w-full h-full flex items-center justify-center text-[15px] leading-none font-medium'
-                delayMs={600}
-              >
-                {initials(name)}
-              </Avatar.Fallback>
-            </Avatar.Root>
+            <div className='flex-none'>
+              <Avatar.Root className='inline-flex items-center justify-center align-middle overflow-hidden select-none w-[45px] h-[45px] rounded-full bg-black/[0.03] border border-solid'>
+                <Avatar.Image
+                  className='w-full h-full object-cover border-inherit'
+                  src={avatar}
+                  alt={name}
+                />
+                <Avatar.Fallback
+                  className='w-full h-full flex items-center justify-center text-[15px] leading-none font-medium'
+                  delayMs={600}
+                >
+                  {initials(name)}
+                </Avatar.Fallback>
+              </Avatar.Root>
+            </div>
             <CardTitle>{name}</CardTitle>
           </div>
           <button
