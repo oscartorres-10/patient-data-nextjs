@@ -11,7 +11,7 @@ export const PatientList = ({
   patients: Patient[]
   onEditPatient: (patient: Patient) => void
 }) => {
-  if (loading) return <>Loading Patient Data...</>
+  if (loading) return <p className='w-max'>Loading Patient Data...</p>
   return (
     <>
       {patients.map((patient) => (
