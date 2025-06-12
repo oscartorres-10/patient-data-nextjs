@@ -22,6 +22,8 @@ const CardTitle = ({ children }: { children: React.ReactNode }) => {
 
 const CardDescription = ({ children }: { children: string }) => {
   {
+    const [isExpanded, setIsExpanded] = useState(false)
+
     if (!children.trim()) {
       return (
         <p className='text-gray-500 italic min-h-12'>
@@ -29,7 +31,7 @@ const CardDescription = ({ children }: { children: string }) => {
         </p>
       )
     }
-    const [isExpanded, setIsExpanded] = useState(false)
+
     return (
       <div>
         <p
