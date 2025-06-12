@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
+import { EMOJI_FAVICON } from '../layout'
 
 export const metadata: Metadata = {
   title: 'Patients Data',
-  description: 'See the data from all patients',
+  description: 'See the data from all Patients',
+  icons: EMOJI_FAVICON,
 }
 
 export default function PatientsLayout({
