@@ -76,6 +76,7 @@ I used it because:
 - Nicer loading states. Something like [`Suspense`](https://react.dev/reference/react/Suspense), which Next.js supports. I like the [Skeleton](https://search.brave.com/search?q=skeleton+ui+loading&summary=1&conversation=017f7a63d9caeedf08317e) pattern.
 - Pagination. The amount of data is very big to have in just one list. The ideal would be for the API to return the data already paginated. Alongside this, of course, Search, Sort and Filter would be useful.
 - URL for Edit modal. With [Next.js Parallel Routes](https://nextjs.org/docs/app/api-reference/file-conventions/parallel-routes#modals) you can have a URL for a modal. I really wanted to implement this one, but due to being the first time and the complexity it entails, I opted not to and instead leave it for a future improvement.
+- A better Toast. Use something like [Sonner](https://sonner.emilkowal.ski/).
 
 ## Next.js default boilerplate
 
