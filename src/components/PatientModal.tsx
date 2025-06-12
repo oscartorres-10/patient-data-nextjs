@@ -57,7 +57,8 @@ export const PatientModal = ({
             Edit Patient
           </Dialog.Title>
           <Dialog.Description className='mb-5 mt-2.5 text-[15px] leading-normal text-gray-500'>
-            Make changes to the patient data here. Click save when you're done.
+            Make changes to the patient data here. Click save when you{`'`}re
+            done.
           </Dialog.Description>
           <form
             onSubmit={(event) => {
