@@ -1,3 +1,4 @@
+import { useToast } from '@/context/ToastProvider'
 import { Patient, PatientSchema } from '@/types/Patient'
 import { Cross2Icon } from '@radix-ui/react-icons'
 import { Dialog } from 'radix-ui'
@@ -27,6 +28,7 @@ export const PatientModal = ({
 }) => {
   const [patientData, setPatientData] = useState<Patient>(emptyPatient())
   const [error, setError] = useState<ZodError>()
+  const { showToast } = useToast()
 
   useEffect(() => {
     if (patient) {
@@ -36,12 +38,12 @@ export const PatientModal = ({
     }
   }, [patient])
 
-  if (!open) return null
-
   const resetModal = () => {
     setPatientData(emptyPatient())
     setError(undefined)
   }
+
+  if (!open) return null
 
   return (
     <Dialog.Root open={open} modal={true}>
@@ -132,10 +134,12 @@ export const PatientModal = ({
                   const result = PatientSchema.safeParse(patientData)
                   if (!result.success) {
                     setError(result.error)
+                    showToast('There is some invalid data!')
                   } else {
                     onSave(patientData)
                     resetModal()
                     setOpen(false)
+                    showToast('Saved changes!')
                   }
                 }}
                 disabled={
